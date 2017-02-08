@@ -62,32 +62,32 @@ class ofApp : public ofBaseApp {
         
         //2. Interleaved Buffer using oF API
         {
-            struct Particle
+            struct Triangle
             {
                 ofVec3f Pos;
                 ofVec3f Col;
             };
             
-            Particle particles[NUM];
+            Triangle triangle[NUM];
             
-            particles[0].Pos = ofVec3f(0.5f, -0.5f, 0.0f);
-            particles[1].Pos = ofVec3f(-0.5f, -0.5f, 0.0f);
-            particles[2].Pos = ofVec3f(0.0f,  0.5f, 0.0f);
+            triangle[0].Pos = ofVec3f(0.5f, -0.5f, 0.0f);
+            triangle[1].Pos = ofVec3f(-0.5f, -0.5f, 0.0f);
+            triangle[2].Pos = ofVec3f(0.0f,  0.5f, 0.0f);
             
-            particles[0].Col = ofVec3f(1.0f, 0.0f, 1.0f);
-            particles[1].Col = ofVec3f(0.0f, 1.0f, 0.5f);
-            particles[2].Col = ofVec3f(1.0f, 0.0f, 1.0f);
+            triangle[0].Col = ofVec3f(1.0f, 0.0f, 1.0f);
+            triangle[1].Col = ofVec3f(0.0f, 1.0f, 0.5f);
+            triangle[2].Col = ofVec3f(1.0f, 0.0f, 1.0f);
             
             
             triangleVBO.allocate();
             triangleVBO.bind(GL_ARRAY_BUFFER);
-            triangleVBO.setData(sizeof(Particle) * NUM, particles, GL_STATIC_DRAW);
+            triangleVBO.setData(sizeof(Triangle) * NUM, triangle, GL_STATIC_DRAW);
             triangleVBO.unbind(GL_ARRAY_BUFFER);
             
             
             interLeaved_Vao.bind();
-            interLeaved_Vao.setAttributeBuffer(posAttribute, triangleVBO, 3, sizeof(Particle), 0);
-            interLeaved_Vao.setAttributeBuffer(colorAttribute, triangleVBO, 3, sizeof(Particle), 12);
+            interLeaved_Vao.setAttributeBuffer(posAttribute, triangleVBO, 3, sizeof(Triangle), 0);
+            interLeaved_Vao.setAttributeBuffer(colorAttribute, triangleVBO, 3, sizeof(Triangle), 12);
             interLeaved_Vao.unbind();
         }
         
@@ -159,9 +159,9 @@ class ofApp : public ofBaseApp {
         shader.end();
         
         
-        if(bshow == 1) ofDrawBitmapString("1VAO binds 2Vbos using oF API", 50, 50);
-        if(bshow == 2) ofDrawBitmapString("Interleaved Buffer using oF API", 50, 50);
-        if(bshow == 3) ofDrawBitmapString("Raw OpenGL API (Interleaved Buffer)", 50, 50);
+        if(bshow == 1) ofDrawBitmapString("1. 1VAO binds 2Vbos using oF API", 50, 50);
+        if(bshow == 2) ofDrawBitmapString("2. Interleaved Buffer using oF API", 50, 50);
+        if(bshow == 3) ofDrawBitmapString("3. Raw OpenGL API (Interleaved Buffer)", 50, 50);
     }
     
     
